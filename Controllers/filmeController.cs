@@ -19,9 +19,10 @@ namespace webApi.Controllers
         
         //adicionando verbo http
         [HttpPost]
-        public void AdicionarFilme([FromBody]filme filme){ //FromBody indica que as informações estão vindas no corpo da requisição
+        public IActionResult AdicionarFilme([FromBody]filme filme){ //FromBody indica que as informações estão vindas no corpo da requisição
             filme.Id = id++; //atribuindo o identificador do meu filme
             filmes.Add(filme);
+            return CreatedAtAction(nameof(RecuperarFilmesPorId), new {Id = filme.Id}, filme); //estamos passando informação onde esse filme está localizado e retornando o filme para o usúario
            
         }
 
@@ -31,7 +32,7 @@ namespace webApi.Controllers
         }
 
         [HttpGet("{id}")] // estamos dizendo que esse caminho receve um id, e automaticamente irá passa-ló como parâmetro para o nosso método
-        public filme RecuperarFilmesPorId(int id){
+        public IActionResult RecuperarFilmesPorId(int id){
            /* foreach (filme fil in filmes) // método manual
             {
                 if(fil.Id == id){
@@ -39,8 +40,13 @@ namespace webApi.Controllers
                 }
             } */
 
-            return filmes.FirstOrDefault(filme => filme.Id == id); //Ele vai retorna o primeiro que encontra com o id que recebeu, se não encontra vai retorna um retorno padrão
-
+           // return filmes.FirstOrDefault(filme => filme.Id == id); //Ele vai retorna o primeiro que encontra com o id que recebeu, se não encontra vai retorna um retorno padrão
+           filme filme = filmes.FirstOrDefault(filme => filme.Id == id); // esse filme pode ou não se nullo
+           if(filme != null){
+               return Ok(filme); //retornando um object result com IActionResult, 
+           }else{
+               return NotFound();
+           }
         }
         
     }
