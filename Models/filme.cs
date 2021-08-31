@@ -5,6 +5,8 @@ namespace webApi.Models
     public class filme
     {
 
+    public int Id {get; set;}
+
     [Required(ErrorMessage = "O campo Titulo é obigatório")] //anotando que esse campo é obrigatório
      public string Titulo {get; set;}
 

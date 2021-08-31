@@ -15,12 +15,32 @@ namespace webApi.Controllers
     public class filmeController: ControllerBase
     {
         private static List<filme> filmes = new List<filme>();
+        private static int id = 1; // criando identificado manualmente
         
         //adicionando verbo http
         [HttpPost]
         public void AdicionarFilme([FromBody]filme filme){ //FromBody indica que as informações estão vindas no corpo da requisição
+            filme.Id = id++; //atribuindo o identificador do meu filme
             filmes.Add(filme);
-            Console.WriteLine(filme.Titulo);
+           
+        }
+
+        [HttpGet] //Verbo utilizado para recuperar dados
+        public IEnumerable<filme> RecuperarFilmes(){ // IEnumerable retorna uma lista que não se lmita ao list
+            return filmes;
+        }
+
+        [HttpGet("{id}")] // estamos dizendo que esse caminho receve um id, e automaticamente irá passa-ló como parâmetro para o nosso método
+        public filme RecuperarFilmesPorId(int id){
+           /* foreach (filme fil in filmes) // método manual
+            {
+                if(fil.Id == id){
+                    return fil;
+                }
+            } */
+
+            return filmes.FirstOrDefault(filme => filme.Id == id); //Ele vai retorna o primeiro que encontra com o id que recebeu, se não encontra vai retorna um retorno padrão
+
         }
         
     }
