@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using webApi.Data;
+using webApi.Data.Dto;
 using webApi.Models;
 
 namespace webApi.Controllers
@@ -29,9 +30,15 @@ namespace webApi.Controllers
         
         //adicionando verbo http
         [HttpPost]
-        public IActionResult AdicionarFilme([FromBody]filme filme){ //FromBody indica que as informações estão vindas no corpo da requisição
+        public IActionResult AdicionarFilme([FromBody]CreateFilmeDto filmeDto){ //FromBody indica que as informações estão vindas no corpo da requisição
             /*filme.Id = id++; //atribuindo o identificador do meu filme
             filmes.Add(filme); */
+            filme filme = new filme{
+                Titulo = filmeDto.Titulo,
+                Genero = filmeDto.Genero,
+                Duracao = filmeDto.Duracao,
+                Diretor = filmeDto.Diretor,
+            };
             _context.Filmes.Add(filme); //adicionando filme no banco
             _context.SaveChanges(); // estamos falando pro banco salvar as alterações feitas
             return CreatedAtAction(nameof(RecuperarFilmesPorId), new {Id = filme.Id}, filme); //estamos passando informação onde esse filme está localizado e retornando o filme para o usúario
@@ -62,7 +69,7 @@ namespace webApi.Controllers
         }
 
         [HttpPut("{id}")] //verbo para atualizar dados
-        public IActionResult AtualizarFilme(int id, [FromBody] filme filmeNovo){
+        public IActionResult AtualizarFilme(int id, [FromBody] UpdateFilmeDto filmeNovo){
             filme filme  = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
             if(filme == null){
                 return NotFound();
