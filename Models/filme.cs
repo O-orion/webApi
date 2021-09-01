@@ -5,6 +5,9 @@ namespace webApi.Models
     public class filme
     {
 
+    //comando pra cria migrations: Add-Migration <nome da migração>
+    [Key] // declarando que essa é minha chave primaria para o banco de dados
+    [Required] // dissendo que ela é obrigatória
     public int Id {get; set;}
 
     [Required(ErrorMessage = "O campo Titulo é obigatório")] //anotando que esse campo é obrigatório
