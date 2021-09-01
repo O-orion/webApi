@@ -39,8 +39,8 @@ namespace webApi.Controllers
         }
 
         [HttpGet] //Verbo utilizado para recuperar dados
-        public IActionResult RecuperarFilmes(){ // Método antigo IEnumerable retorna uma lista que não se lmita ao list
-            return Ok(_context.Filmes); // recuperando dados do banco
+        public IEnumerable<filme> RecuperarFilmes(){ // Método antigo IEnumerable retorna uma lista que não se lmita ao list
+            return _context.Filmes; // recuperando dados do banco
         }
 
         [HttpGet("{id}")] // estamos dizendo que esse caminho receve um id, e automaticamente irá passa-ló como parâmetro para o nosso método
@@ -59,6 +59,32 @@ namespace webApi.Controllers
            }else{
                return NotFound();
            }
+        }
+
+        [HttpPut("{id}")] //verbo para atualizar dados
+        public IActionResult AtualizarFilme(int id, [FromBody] filme filmeNovo){
+            filme filme  = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+            if(filme == null){
+                return NotFound();
+            }
+            filme.Titulo = filmeNovo.Titulo;
+            filme.Diretor = filmeNovo.Diretor;
+            filme.Genero = filmeNovo.Genero;
+            filme.Duracao = filmeNovo.Duracao;
+
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult RemoverFilme(int id){
+            filme filme =  _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+            if(filme == null){
+                return NotFound();
+            }
+            _context.Remove(filme);
+            _context.SaveChanges();
+            return NoContent();
         }
         
     }
