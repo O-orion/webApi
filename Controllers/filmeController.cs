@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using webApi.Data;
 using webApi.Models;
 
 namespace webApi.Controllers
@@ -14,21 +15,32 @@ namespace webApi.Controllers
     [Route("[controller]")] // especificando o cmainho como nome do controller
     public class filmeController: ControllerBase
     {
+        private FilmeContext _context;  //utilizamos para acessa e salvar dados no banco
+
+        //criando um contrutor para iniciliar *cria uma instância do filmecobext*
+        public filmeController(FilmeContext context){
+            _context = context;
+        }
+        /*
+              Método antigo é manual sem o banco de dados
         private static List<filme> filmes = new List<filme>();
-        private static int id = 1; // criando identificado manualmente
+        private static int id = 1; // criando identificado manualmente 
+        */
         
         //adicionando verbo http
         [HttpPost]
         public IActionResult AdicionarFilme([FromBody]filme filme){ //FromBody indica que as informações estão vindas no corpo da requisição
-            filme.Id = id++; //atribuindo o identificador do meu filme
-            filmes.Add(filme);
+            /*filme.Id = id++; //atribuindo o identificador do meu filme
+            filmes.Add(filme); */
+            _context.Filmes.Add(filme); //adicionando filme no banco
+            _context.SaveChanges(); // estamos falando pro banco salvar as alterações feitas
             return CreatedAtAction(nameof(RecuperarFilmesPorId), new {Id = filme.Id}, filme); //estamos passando informação onde esse filme está localizado e retornando o filme para o usúario
            
         }
 
         [HttpGet] //Verbo utilizado para recuperar dados
-        public IEnumerable<filme> RecuperarFilmes(){ // IEnumerable retorna uma lista que não se lmita ao list
-            return filmes;
+        public IActionResult RecuperarFilmes(){ // Método antigo IEnumerable retorna uma lista que não se lmita ao list
+            return Ok(_context.Filmes); // recuperando dados do banco
         }
 
         [HttpGet("{id}")] // estamos dizendo que esse caminho receve um id, e automaticamente irá passa-ló como parâmetro para o nosso método
@@ -41,7 +53,7 @@ namespace webApi.Controllers
             } */
 
            // return filmes.FirstOrDefault(filme => filme.Id == id); //Ele vai retorna o primeiro que encontra com o id que recebeu, se não encontra vai retorna um retorno padrão
-           filme filme = filmes.FirstOrDefault(filme => filme.Id == id); // esse filme pode ou não se nullo
+           filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id); // esse filme pode ou não se nullo
            if(filme != null){
                return Ok(filme); //retornando um object result com IActionResult, 
            }else{
