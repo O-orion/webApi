@@ -51,3 +51,5 @@ C:\Users\Lucas\Desktop\projeto_C#\webApi\bin\Debug\net5.0\Microsoft.EntityFramew
 C:\Users\Lucas\Desktop\projeto_C#\webApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Lucas\Desktop\projeto_C#\webApi\bin\Debug\net5.0\SQLitePCLRaw.core.dll
 C:\Users\Lucas\Desktop\projeto_C#\webApi\bin\Debug\net5.0\MySql.EntityFrameworkCore.dll
+C:\Users\Lucas\Desktop\projeto_C#\webApi\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Lucas\Desktop\projeto_C#\webApi\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

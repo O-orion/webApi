@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3VWrYbuhW7KwrDHG/V+dlN9+P97/Y8R70kUTZL0y8nt1tt+DI/Tv/xPhGzR5/WUuISLvgQl0ZqH6mA/w1Rm34A==",
+  "dgSpecHash": "sjTmeJPg5jJw06SP2Ot2aA0nmHM6B5sUGd+jDnsE8jX6pZrFCfzohIt4+WP1qliOZ/aT3LVmhwrL3Wl0I4YwnA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lucas\\Desktop\\projeto_C#\\webApi\\webApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Lucas\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\Lucas\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -48,6 +50,7 @@
     "C:\\Users\\Lucas\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\Lucas\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.4.0\\system.security.cryptography.protecteddata.4.4.0.nupkg.sha512",

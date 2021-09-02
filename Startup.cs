@@ -37,6 +37,8 @@ namespace webApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "webApi", Version = "v1" });
             });
+            //iniciando o automapper na aplicação, estamos dizendo que estamos utilizando o dominio da aplicação com autoMapper
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using webApi.Data;
 using webApi.Data.Dto;
@@ -17,10 +18,13 @@ namespace webApi.Controllers
     public class filmeController: ControllerBase
     {
         private FilmeContext _context;  //utilizamos para acessa e salvar dados no banco
+        private IMapper _mapper;
 
         //criando um contrutor para iniciliar *cria uma instância do filmecobext*
-        public filmeController(FilmeContext context){
+        public filmeController(FilmeContext context, IMapper mapper){
             _context = context;
+            _mapper = mapper;
+        
         }
         /*
               Método antigo é manual sem o banco de dados
@@ -33,12 +37,15 @@ namespace webApi.Controllers
         public IActionResult AdicionarFilme([FromBody]CreateFilmeDto filmeDto){ //FromBody indica que as informações estão vindas no corpo da requisição
             /*filme.Id = id++; //atribuindo o identificador do meu filme
             filmes.Add(filme); */
-            filme filme = new filme{
+           /* filme filme = new filme{
                 Titulo = filmeDto.Titulo,
                 Genero = filmeDto.Genero,
                 Duracao = filmeDto.Duracao,
                 Diretor = filmeDto.Diretor,
-            };
+            };*/
+            
+            filme filme = _mapper.Map<filme>(filmeDto); //mappeando filmeDto para a classe filme
+
             _context.Filmes.Add(filme); //adicionando filme no banco
             _context.SaveChanges(); // estamos falando pro banco salvar as alterações feitas
             return CreatedAtAction(nameof(RecuperarFilmesPorId), new {Id = filme.Id}, filme); //estamos passando informação onde esse filme está localizado e retornando o filme para o usúario
@@ -74,10 +81,12 @@ namespace webApi.Controllers
             if(filme == null){
                 return NotFound();
             }
-            filme.Titulo = filmeNovo.Titulo;
+            /*filme.Titulo = filmeNovo.Titulo;
             filme.Diretor = filmeNovo.Diretor;
             filme.Genero = filmeNovo.Genero;
-            filme.Duracao = filmeNovo.Duracao;
+            filme.Duracao = filmeNovo.Duracao;*/
+
+            _mapper.Map(filmeNovo, filme); // transformando os dados do filme novo em um filme
 
             _context.SaveChanges();
             return NoContent();
